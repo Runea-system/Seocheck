@@ -1,0 +1,24 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mint Moondeng</title>
+<style>body{font-family:system-ui;background:#0f0b1a;color:#eee;max-width:480px;margin:auto;padding:20px}h1{margin:.2em 0}button{width:100%;padding:15px;margin:6px 0;font-size:16px;border:0;border-radius:12px;background:#f3ba2f;color:#000;font-weight:700}select,input{width:100%;padding:12px;font-size:16px;border-radius:10px;border:0;margin:6px 0;box-sizing:border-box}#log{white-space:pre-wrap;font-size:13px;background:#1d1630;padding:12px;border-radius:8px;word-break:break-all;margin-top:10px}small{color:#aaa}</style></head><body>
+<h1>🦛 Mint Moondeng</h1><small>BNB Smart Chain · 0x2b110eDf44534E063fCE1805b092FfacC0DF13F5</small>
+<p id="sup">Minted: … / 2,222</p>
+<button id="c">Hubungkan wallet / Connect wallet</button>
+<label>Tier</label><select id="t">
+<option value="0">Free — 0.0002 BNB</option><option value="1">Tier 1 — 0.001 BNB</option><option value="2">Tier 2 — 0.002 BNB</option><option value="3">Tier 3 — 0.003 BNB</option><option value="4">Tier 4 — 0.004 BNB</option></select>
+<label>Jumlah / Quantity (max 5 per wallet)</label><input id="q" type="number" min="1" max="5" value="1">
+<button id="m">Mint</button>
+<div id="log">Buka di browser MetaMask / Trust Wallet / Binance Wallet.</div>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+<script>
+const CA="0x2b110eDf44534E063fCE1805b092FfacC0DF13F5",P=["0.0002","0.001","0.002","0.003","0.004"];
+const ABI=["function freeMint(uint256) payable","function mintTier(uint8,uint256) payable","function totalMinted() view returns (uint256)","function mintOpen() view returns (bool)"];
+const L=t=>document.getElementById('log').textContent=t;let c;
+const ro=new ethers.Contract(CA,ABI,new ethers.JsonRpcProvider("https://bsc-dataseed.bnbchain.org"));
+ro.totalMinted().then(n=>document.getElementById('sup').textContent="Minted: "+n+" / 2,222").catch(()=>{});
+async function conn(){if(!window.ethereum){L("Wallet tidak ditemukan. Buka halaman ini di browser wallet.");return}
+try{await ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x38"}]})}catch(e){}
+const p=new ethers.BrowserProvider(window.ethereum);await p.send("eth_requestAccounts",[]);const s=await p.getSigner();c=new ethers.Contract(CA,ABI,s);L("Terhubung: "+await s.getAddress())}
+document.getElementById('c').onclick=conn;
+document.getElementById('m').onclick=async()=>{try{if(!c)await conn();if(!c)return;const t=+document.getElementById('t').value,q=Math.max(1,Math.min(5,+document.getElementById('q').value||1));
+const v=ethers.parseEther(P[t])*BigInt(q);L("Konfirmasi di wallet…");const tx=t==0?await c.freeMint(q,{value:v}):await c.mintTier(t,q,{value:v});L("Dikirim: "+tx.hash);await tx.wait();L("✅ Mint berhasil! "+q+" Moondeng\n"+tx.hash);ro.totalMinted().then(n=>document.getElementById('sup').textContent="Minted: "+n+" / 2,222")}catch(e){L("Gagal: "+(e.shortMessage||e.reason||e.message))}};
+</script></body></html>
