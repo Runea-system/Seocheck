@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="zh-Hans" data-theme="dark" data-lang="both">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Moondeng Mint · 月光小河马</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="hark.css" />
+    <link rel="stylesheet" href="hark-hero.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --x-night: #0b0f2e;
+        --x-night-2: #17134a;
+        --x-pink: #ffb6d5;
+        --x-lav: #c8b8ff;
+        --x-ink: #1b1440;
+        --x-card: #171640;
+        --x-card-2: #25215a;
+        --x-stroke: rgb(200 184 255 / 0.22);
+        --x-muted: #c9c3e6;
+        --x-gold: #ffd98a;
+        --x-mint: #7ef0c4;
+      }
+      body {
+        background:
+          radial-gradient(900px 520px at 85% -8%, rgb(200 184 255 / 0.22), transparent 62%),
+          radial-gradient(700px 500px at 0% 40%, rgb(255 182 213 / 0.08), transparent 60%),
+          linear-gradient(var(--x-night), var(--x-night-2) 55%, var(--x-night));
+        background-color: var(--x-night);
+        background-attachment: fixed;
+        color: var(--text-primary);
+      }
+      .main, .foot { background-color: var(--x-night); border-radius: var(--r-l); }
+      .fineprint { color: var(--x-muted); }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-image:
+          radial-gradient(1px 1px at 12% 18%, #fff9 50%, transparent 51%),
+          radial-gradient(1px 1px at 68% 8%, #fff8 50%, transparent 51%),
+          radial-gradient(1.5px 1.5px at 38% 72%, #fff7 50%, transparent 51%),
+          radial-gradient(1px 1px at 86% 54%, #fff9 50%, transparent 51%),
+          radial-gradient(1.5px 1.5px at 22% 92%, #fff6 50%, transparent 51%),
+          radial-gradient(1px 1px at 55% 40%, #fff7 50%, transparent 51%);
+        background-size: 420px 420px;
+      }
+
+      /* language toggle */
+      html[data-lang="zh"] .en,
+      html[data-lang="en"] .zh { display: none !important; }
+      .x-bi > .en { display: block; }
+      html[data-lang="both"] .x-bi > .en { color: var(--x-muted); font-size: 0.82em; font-weight: var(--weight-regular); margin-top: 2px; }
+      html[data-lang="both"] .x-inl.en::before { content: " "; }
+
+      /* nav */
+      .x-nav {
+        position: sticky;
+        top: calc(env(safe-area-inset-top, 0px) + 12px);
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px;
+        border-radius: var(--r-pill);
+        background: rgb(11 15 46 / 0.72);
+        -webkit-backdrop-filter: var(--hark-blur);
+        backdrop-filter: var(--hark-blur);
+        border: 1px solid var(--x-stroke);
+        box-shadow: 0 8px 40px rgb(0 0 0 / 0.35);
+      }
+      .x-brand { flex: none; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 10px 0 8px; min-height: var(--tap); min-width: var(--tap); font: var(--type-label); color: var(--x-pink); text-decoration: none; }
+      .x-links { display: flex; min-width: 0; flex: 1; overflow-x: auto; scrollbar-width: none; }
+      .x-links::-webkit-scrollbar { display: none; }
+      .x-links a {
+        flex: none;
+        display: flex;
+        align-items: center;
+        min-height: var(--tap);
+        padding: 0 12px;
+        border-radius: var(--r-pill);
+        font: var(--type-label);
+        color: var(--x-muted);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .x-links a:hover { color: var(--text-primary); background: var(--x-card-2); }
+      .x-lang { flex: none; display: flex; padding: 0; border-radius: var(--r-pill); background: var(--x-card-2); }
+      .x-lang button {
+        min-width: var(--tap);
+        min-height: var(--tap);
+        padding: 0 10px;
+        border: 0;
+        border-radius: var(--r-pill);
+        background: transparent;
+        color: var(--x-muted);
+        font: var(--type-tag);
+        cursor: pointer;
+      }
+      .x-lang button[aria-pressed="true"] { background: var(--x-lav); color: var(--x-ink); }
+      @media (max-width: 640px) { .x-brand span:last-child { display: none; } }
+
+      /* icons */
+      .x-ico { flex: none; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .x-ibadge {
+        display: grid; place-items: center; width: 52px; height: 52px; border-radius: var(--r-m);
+        background: linear-gradient(135deg, rgb(255 182 213 / 0.22), rgb(200 184 255 / 0.22) 55%, rgb(255 217 138 / 0.2));
+        border: 1px solid rgb(200 184 255 / 0.4); color: #fff;
+        box-shadow: 0 0 24px rgb(200 184 255 / 0.22);
+      }
+      .x-ibadge .x-ico { width: 26px; height: 26px; }
+      .x-logo { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: 50% 30%; border: 2px solid var(--x-gold); box-shadow: 0 0 14px rgb(255 217 138 / 0.45); background: var(--x-card-2); }
+      .x-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+      /* buttons */
+      .x-btn {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 48px;
+        padding: 0 22px;
+        border-radius: var(--r-pill);
+        border: 1px solid rgb(200 184 255 / 0.6);
+        background: linear-gradient(180deg, #34306e, #241f5c);
+        background-color: #2a2563;
+        -webkit-backdrop-filter: var(--hark-blur);
+        backdrop-filter: var(--hark-blur);
+        color: #fff;
+        font: var(--type-label);
+        font-weight: var(--weight-bold);
+        letter-spacing: 0.01em;
+        line-height: 1.2;
+        text-align: left;
+        text-decoration: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06), 0 0 18px rgb(200 184 255 / 0.28);
+        transition: transform var(--dur-quick) var(--ease-out), box-shadow var(--dur-quick) ease, filter var(--dur-quick) ease;
+      }
+      .x-btn > * { position: relative; z-index: 1; }
+      .x-btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.5) 50%, transparent 70%);
+        transform: translateX(-130%);
+        animation: x-shine 3.6s var(--ease-out) infinite;
+      }
+      @keyframes x-shine { 0%, 62% { transform: translateX(-130%); } 100% { transform: translateX(130%); } }
+      .x-btn:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12), 0 10px 34px rgb(200 184 255 / 0.5); }
+      .x-btn:active { transform: translateY(1px) scale(0.97); transition-duration: 60ms; }
+      .x-btn:focus-visible { outline: 2px solid var(--x-gold); outline-offset: 3px; }
+      .x-btn--primary {
+        border-color: transparent;
+        background: linear-gradient(100deg, var(--x-pink), var(--x-lav) 52%, var(--x-gold));
+        background-color: var(--x-lav);
+        color: var(--x-ink);
+        box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.4), 0 8px 28px rgb(255 182 213 / 0.45), 0 0 22px rgb(255 217 138 / 0.25);
+      }
+      .x-btn--primary:hover { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.5), 0 14px 44px rgb(200 184 255 / 0.65), 0 0 34px rgb(255 217 138 / 0.5); }
+      .x-btn--tier {
+        border-color: transparent;
+        background: linear-gradient(100deg, var(--x-acc), var(--x-acc-2));
+        background-color: var(--x-acc);
+        color: var(--x-ink);
+        box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.4), 0 8px 26px var(--x-glow);
+      }
+      .x-btn--tier:hover { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.5), 0 14px 40px var(--x-glow), 0 0 30px var(--x-glow); }
+      .x-btn:disabled, .x-btn[aria-disabled="true"] {
+        cursor: not-allowed;
+        transform: none;
+        filter: saturate(0.7) brightness(0.92);
+        box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+      }
+      .x-btn:disabled::after { display: none; }
+      .x-btn .x-bi > .en { color: inherit !important; opacity: 1; font-size: 12px; margin-top: 0 !important; }
+      .x-btn--wide { width: 100%; }
+      .x-btn.is-copied { border-color: transparent; background: var(--x-mint); color: var(--x-ink); box-shadow: 0 0 22px rgb(126 240 196 / 0.5); }
+      @media (prefers-reduced-motion: reduce) { .x-btn::after { animation: none; display: none; } .x-btn:hover { transform: none; } }
+      .x-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+      .x-soon {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 4px 10px; border-radius: var(--r-pill);
+        border: 1px dashed var(--x-pink); color: var(--x-pink);
+        font: var(--type-tag);
+      }
+      .x-soon::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--x-pink); }
+
+      /* hero extras */
+      .hero { border: 1px solid var(--x-stroke); }
+      .hero h1 { color: #fff; text-shadow: 0 2px 24px rgb(200 184 255 / 0.5); }
+      .hero__sub { max-width: 40ch; }
+      .x-progress { display: grid; gap: 8px; max-width: 30rem; }
+      .x-progress__top { display: flex; justify-content: space-between; font: var(--type-label); }
+      .x-progress__top b { font-family: "Geist Mono", monospace; font-weight: var(--weight-regular); }
+      .x-bar { height: 10px; border-radius: var(--r-pill); background: rgb(245 245 247 / 0.18); overflow: hidden; }
+      .x-bar > span { display: block; height: 100%; min-width: 10px; border-radius: inherit; background: linear-gradient(90deg, var(--x-pink), var(--x-lav)); }
+      .x-notice {
+        display: flex; gap: 10px; align-items: flex-start;
+        padding: 10px 14px; border-radius: var(--r-m);
+        background: var(--hero-glass); border: 1px solid var(--hero-glass-stroke);
+        -webkit-backdrop-filter: var(--hark-blur); backdrop-filter: var(--hark-blur);
+        font-size: var(--size-small); max-width: 30rem;
+      }
+      .x-notice::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: 5px; border-radius: 50%; background: var(--x-pink); box-shadow: 0 0 0 4px rgb(255 182 213 / 0.25); }
+      .x-notice--live::before { background: var(--x-mint); box-shadow: 0 0 0 4px rgb(126 240 196 / 0.25); }
+      .x-notice a { color: inherit; font-family: "Geist Mono", monospace; overflow-wrap: anywhere; display: flex !important; align-items: center; min-height: var(--tap); }
+      .x-footaddr { color: inherit; overflow-wrap: anywhere; display: inline-flex; align-items: center; min-height: var(--tap); }
+      .x-contract p { color: var(--x-muted); font-size: var(--size-small); }
+      .x-facts { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; font-size: var(--size-small); }
+      .x-facts div { display: flex; gap: 6px; }
+      .x-facts dt { color: var(--x-muted); }
+      .x-facts dd { margin: 0; font-family: "Geist Mono", monospace; }
+
+      /* headings */
+      .section .head h2 .zh, .section .head h2 .en { color: var(--text-primary); }
+      html[data-lang="both"] .section .head h2 > .en { color: var(--x-lav); }
+      .head__eyebrow { color: var(--x-pink) !important; }
+
+      /* cards */
+      .x-card {
+        padding: 22px;
+        border-radius: var(--r-l);
+        background: var(--x-card);
+        border: 1px solid var(--x-stroke);
+        display: grid;
+        gap: 12px;
+        align-content: start;
+      }
+      .x-card h3 { font: var(--type-heading); }
+      .x-ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+      .x-ways .x-card p { color: var(--x-muted); font-size: var(--size-small); }
+      .x-ways .x-card { grid-template-rows: auto auto 1fr auto; align-content: stretch; }
+
+      /* wallet check + developer */
+      .x-tools { display: grid; gap: 16px; margin-top: 16px; }
+      .x-check__top { display: flex; align-items: center; gap: 14px; }
+      .x-check p { color: var(--x-muted); font-size: var(--size-small); }
+      .x-checkform { display: flex; flex-wrap: wrap; gap: 10px; }
+      .x-checkform input {
+        flex: 1 1 240px; min-width: 0; min-height: 48px; padding: 0 18px;
+        border-radius: var(--r-pill); border: 1px solid rgb(200 184 255 / 0.4);
+        background: rgb(0 0 0 / 0.35); color: #fff;
+        font: 16px/1.2 "Geist Mono", monospace;
+      }
+      .x-checkform input::placeholder { color: #a39cc8; }
+      .x-checkform input:focus { outline: 2px solid var(--x-lav); outline-offset: 1px; }
+      .x-checkform .x-btn { flex: 0 0 auto; }
+      .x-checkmsg { display: flex; gap: 10px; align-items: flex-start; padding: 12px 16px; border-radius: var(--r-m); background: #2b2550; border: 1px solid rgb(255 217 138 / 0.55); color: #fff !important; font-size: var(--size-small); }
+      .x-checkmsg[hidden] { display: none; }
+      .x-checkmsg .x-ico { color: var(--x-gold); margin-top: 1px; }
+      .x-dev { border-radius: var(--r-l); background: var(--x-card); border: 1px solid var(--x-stroke); }
+      .x-dev summary {
+        list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px;
+        min-height: 56px; padding: 12px 20px; font: var(--type-body-strong); color: #fff;
+      }
+      .x-dev summary::-webkit-details-marker { display: none; }
+      .x-dev summary > .x-bi { flex: 1; }
+      .x-dev summary > .x-ico:first-child { color: var(--x-lav); }
+      .x-dev__body { padding: 0 16px 16px; display: grid; gap: 10px; }
+      .x-dev pre { margin: 0; padding: 16px; border-radius: var(--r-m); background: rgb(0 0 0 / 0.4); border: 1px solid var(--x-stroke); overflow-x: auto; font: 13px/1.7 "Geist Mono", monospace; color: #fff; }
+      .x-dev pre .x-cmt { color: var(--x-gold); }
+      .x-dev__body .x-btn { justify-self: start; }
+      .x-chev { transition: transform var(--dur-quick) var(--ease-out); color: var(--x-pink); }
+      details[open] > summary .x-chev { transform: rotate(180deg); }
+
+      .x-tiers { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 16px; }
+      .x-tier { padding: 12px 12px 18px; grid-template-rows: auto 1fr; align-content: stretch; border-color: var(--x-glow); box-shadow: 0 0 0 1px rgb(255 255 255 / 0.03) inset; }
+      .x-tier figure { margin: 0; aspect-ratio: 1; border-radius: var(--r-m); overflow: hidden; background: var(--x-card-2); }
+      .x-tier figure img { width: 100%; height: 100%; object-fit: cover; }
+      .x-tier figcaption { display: none; }
+      .x-tier > div { padding-inline: 6px; display: flex; flex-direction: column; gap: 12px; }
+      .x-tier .x-buy { margin-top: auto; }
+      .x-price { font: var(--type-figure); color: var(--x-acc, var(--x-pink)); }
+      .x-price small { font: var(--type-caption); color: var(--x-muted); display: block; }
+      .x-acc-free { --x-acc: #eef1f7; --x-acc-2: #b4bccd; --x-glow: rgb(220 226 240 / 0.38); }
+      .x-acc-splash { --x-acc: #9af5d2; --x-acc-2: #4fdcaa; --x-glow: rgb(126 240 196 / 0.42); }
+      .x-acc-cool { --x-acc: #b5ddff; --x-acc-2: #78bbff; --x-glow: rgb(120 187 255 / 0.42); }
+      .x-acc-astro { --x-acc: #dcc4ff; --x-acc-2: #bc9bff; --x-glow: rgb(188 155 255 / 0.45); }
+      .x-acc-king { --x-acc: #ffe7a3; --x-acc-2: #f7c14d; --x-glow: rgb(247 193 77 / 0.42); }
+      .x-free {
+        grid-template-columns: 180px minmax(0, 1fr) minmax(220px, auto);
+        align-items: center;
+        gap: 20px;
+        background: linear-gradient(120deg, #2a2456, #1d1a4c);
+        background-color: #231b4d;
+        margin-bottom: 16px;
+        border-color: var(--x-glow);
+      }
+      .x-freeimg { position: relative; margin: 0; aspect-ratio: 1; border-radius: var(--r-m); overflow: hidden; background: var(--x-card-2); box-shadow: 0 0 30px var(--x-glow); }
+      .x-freeimg img { width: 100%; height: 100%; object-fit: cover; }
+      .x-ribbon {
+        position: absolute; top: 16px; right: -38px; width: 140px; padding: 5px 0;
+        transform: rotate(45deg); text-align: center;
+        background: linear-gradient(180deg, #ffffff, #c9cfdc 55%, #9ea6b8);
+        background-color: #d8dde8;
+        color: var(--x-ink); font: var(--type-tag); font-weight: var(--weight-bold); letter-spacing: 0.18em;
+        box-shadow: 0 4px 12px rgb(0 0 0 / 0.4);
+      }
+      .x-free .x-buy { flex-direction: column; align-items: stretch; }
+      .x-free .x-stepper { align-self: flex-start; }
+      .x-moon {
+        aspect-ratio: 1; border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #fff8e7, #f3e3c0 55%, #d9c7a0);
+        background-color: #f3e3c0;
+        box-shadow: 0 0 60px rgb(255 248 231 / 0.35);
+        display: grid; place-items: center;
+        font: var(--type-display); color: var(--x-ink);
+      }
+      @media (max-width: 760px) {
+        .x-free { grid-template-columns: 120px minmax(0, 1fr); gap: 16px; }
+        .x-free > :last-child { grid-column: 1 / -1; }
+        .x-ribbon { top: 12px; right: -44px; font-size: 12px; letter-spacing: 0.12em; }
+      }
+      .x-buy { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+      .x-buy .x-btn { flex: 1 1 100%; }
+      .x-stepper { display: inline-flex; align-items: center; border: 1px solid var(--x-stroke); border-radius: var(--r-pill); }
+      .x-stepper button {
+        width: var(--tap); height: var(--tap); border: 0; border-radius: 50%;
+        background: transparent; color: var(--text-primary); font: var(--type-heading); cursor: pointer;
+      }
+      .x-stepper button:hover:not(:disabled) { background: var(--x-card-2); }
+      .x-stepper button:disabled { opacity: 0.35; cursor: default; }
+      .x-stepper output { min-width: 28px; text-align: center; font: var(--type-label); font-family: "Geist Mono", monospace; }
+      .x-random { font-size: var(--size-small); color: var(--x-muted); }
+
+      /* agent */
+      .steps .step { border-color: var(--x-stroke); }
+      .step__num { color: var(--x-lav); }
+      .x-code {
+        display: flex; align-items: center; gap: 10px;
+        padding: 10px 10px 10px 16px; border-radius: var(--r-m);
+        background: rgb(0 0 0 / 0.35); border: 1px solid var(--x-stroke);
+      }
+      .x-code code { flex: 1; min-width: 0; white-space: normal; overflow-wrap: anywhere; font: 13px/1.5 "Geist Mono", monospace; color: var(--x-pink); }
+      .x-prompt { border-radius: var(--r-m); border: 1px solid var(--x-stroke); background: rgb(0 0 0 / 0.3); overflow: hidden; }
+      .x-prompt__bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px; border-bottom: 1px solid var(--x-stroke); }
+      .x-tabs { display: flex; gap: 4px; }
+      .x-tabs button {
+        min-height: var(--tap); min-width: var(--tap); padding: 0 12px; border: 0; border-radius: var(--r-pill);
+        background: transparent; color: var(--x-muted); font: var(--type-tag); cursor: pointer;
+      }
+      .x-tabs button[aria-selected="true"] { background: var(--x-card-2); color: var(--text-primary); }
+      .x-prompt p { padding: 16px; font: 14px/1.6 var(--sans); white-space: pre-wrap; }
+      .x-prompt p[hidden] { display: none; }
+
+      /* lore */
+      .x-lore {
+        display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: center;
+        padding: clamp(24px, 4vw, 44px); border-radius: var(--r-xl);
+        background: radial-gradient(circle at 10% 50%, rgb(255 248 231 / 0.12), transparent 50%), var(--x-card);
+        border: 1px solid var(--x-stroke);
+      }
+      .x-lore .x-moon { width: clamp(88px, 12vw, 140px); }
+      .x-lore .x-moon .x-ico { width: 38%; height: 38%; color: var(--x-ink); stroke-width: 1.6; }
+      /* agent skill */
+      .x-skill { margin-bottom: 16px; background: linear-gradient(135deg, rgb(200 184 255 / 0.12), transparent 60%), var(--x-card); background-color: var(--x-card); }
+      .x-skill .x-code .x-btn { flex: none; }
+      .x-note { display: flex; gap: 8px; align-items: center; color: var(--x-muted); font-size: var(--size-small); }
+      .x-note .x-ico { color: var(--x-gold); }
+      @media (max-width: 520px) { .x-code { flex-wrap: wrap; } .x-code .x-btn { width: 100%; } }
+      .x-lore p { font: var(--type-lede); max-width: 56ch; }
+      html[data-lang="both"] .x-lore .en { font-size: var(--size-prose); margin-top: 12px; }
+      @media (max-width: 600px) { .x-lore { grid-template-columns: 1fr; } }
+
+      /* faq */
+      .x-faq { display: grid; gap: 10px; }
+      .x-faq details { border-radius: var(--r-m); background: var(--x-card); border: 1px solid var(--x-stroke); }
+      .x-faq summary {
+        list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+        min-height: var(--tap); padding: 14px 18px; font: var(--type-body-strong);
+      }
+      .x-faq summary::-webkit-details-marker { display: none; }
+      .x-faq summary > .x-bi { flex: 1; }
+      .x-faq summary > .x-ico:first-child { color: var(--x-mint); width: 22px; height: 22px; }
+      .x-faq summary { justify-content: flex-start; color: #fff; }
+      .x-faq details > p { padding: 0 18px 16px; color: var(--x-muted); }
+      html[data-lang="both"] .x-faq details > p.x-bi > .en { font-size: var(--size-small); }
+
+      /* fab */
+      .x-fab {
+        position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 40;
+        min-height: 54px; padding: 0 22px;
+      }
+      .foot { border-top: 1px solid var(--x-stroke); }
+
+      /* unique: illustrated hippos */
+      .x-nfts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      @media (min-width: 600px) { .x-nfts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; } }
+      @media (min-width: 800px) { .x-nfts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+      @media (min-width: 980px) { .x-nfts { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+      .x-nft {
+        display: grid; gap: 8px; padding: 8px 8px 10px; border-radius: var(--r-m);
+        background: var(--x-card); border: 1px solid var(--x-glow); color: inherit; text-align: left; font: inherit;
+        cursor: pointer; -webkit-tap-highlight-color: transparent;
+        transition: transform var(--dur-quick) var(--ease-out), box-shadow var(--dur-quick) ease;
+      }
+      .x-nft:hover { transform: translateY(-2px); box-shadow: 0 10px 28px var(--x-glow); }
+      .x-nft:active { transform: scale(0.97); }
+      .x-nft:focus-visible { outline: 2px solid var(--x-gold); outline-offset: 3px; }
+      .x-art { display: block; aspect-ratio: 1; border-radius: var(--r-s); overflow: hidden; background: var(--x-card-2); }
+      .x-art img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 80ms ease, filter 80ms ease; }
+      .x-feat.is-shuffling > .x-art img { transform: scale(0.95); filter: saturate(1.25) brightness(1.08); }
+      .x-art.is-pop { animation: x-pop 380ms var(--ease-out); }
+      @keyframes x-pop { 0% { transform: scale(0.9); } 60% { transform: scale(1.05); } 100% { transform: scale(1); } }
+      @media (prefers-reduced-motion: reduce) { .x-art.is-pop { animation: none; } .x-art img { transition: none; } }
+      .x-nft__meta { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding-inline: 2px; min-width: 0; }
+      .x-no { font: 13px/1.2 "Geist Mono", monospace; color: #fff; }
+      .x-tag {
+        display: inline-flex; align-items: center; padding: 3px 9px; border-radius: var(--r-pill);
+        background: linear-gradient(100deg, var(--x-acc), var(--x-acc-2)); background-color: var(--x-acc);
+        color: var(--x-ink); font: var(--type-tag); font-weight: var(--weight-bold); white-space: nowrap;
+      }
+      .x-feat {
+        gap: 20px; margin-bottom: 16px; border-color: var(--x-glow);
+        background: linear-gradient(135deg, rgb(200 184 255 / 0.12), transparent 60%), var(--x-card); background-color: var(--x-card);
+      }
+      @media (min-width: 720px) { .x-feat { grid-template-columns: 260px minmax(0, 1fr); align-items: start; } }
+      .x-feat > .x-art { width: 100%; max-width: 320px; justify-self: center; border-radius: var(--r-l); box-shadow: 0 0 36px var(--x-glow); }
+      .x-feat__info { display: grid; gap: 14px; align-content: start; min-width: 0; }
+      .x-feat__top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+      .x-feat__top .x-no, .x-modal .x-no { font-size: 20px; }
+      .x-feat .x-btn { justify-self: start; }
+      .x-traits .row { padding: 9px 0; border-color: var(--x-stroke); }
+      .x-traits dt { font-size: var(--size-small); color: var(--x-muted); flex: none; }
+      .x-traits dd { font-size: var(--size-small); color: #fff; white-space: normal; text-align: right; }
+      .x-rare { display: inline-block; margin-left: 6px; color: var(--x-gold); font: var(--type-tag); }
+      .x-modal {
+        width: min(92vw, 720px); max-height: 90vh; padding: 0; border-radius: var(--r-xl);
+        border: 1px solid var(--x-glow, var(--x-stroke)); background: var(--x-card); color: var(--text-primary); overflow: auto;
+        box-shadow: 0 20px 80px rgb(0 0 0 / 0.5);
+      }
+      .x-modal::backdrop { background: rgb(5 6 20 / 0.72); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+      .x-modal__body { display: grid; gap: 18px; padding: 18px; }
+      @media (min-width: 640px) { .x-modal__body { grid-template-columns: 280px minmax(0, 1fr); padding: 22px; align-items: start; } }
+      .x-modal .x-art { border-radius: var(--r-l); box-shadow: 0 0 36px var(--x-glow); }
+      .x-modal__head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+      .x-close {
+        flex: none; display: grid; place-items: center; width: var(--tap); height: var(--tap); border-radius: 50%;
+        border: 1px solid var(--x-stroke); background: var(--x-card-2); color: #fff; cursor: pointer;
+      }
+      .x-close:focus-visible { outline: 2px solid var(--x-gold); outline-offset: 2px; }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
+      <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M11 3c.6 4.6 2.4 6.4 7 7-4.6.6-6.4 2.4-7 7-.6-4.6-2.4-6.4-7-7 4.6-.6 6.4-2.4 7-7Z"/><path d="M19 15v5M16.5 17.5h5"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    </svg>
+    <div class="page" id="top">
+      <header class="x-nav">
+        <a class="x-brand" href="#top"><img class="x-logo" src="moondeng-king.png" alt="" /><span>Moondeng</span></a>
+        <nav class="x-links" aria-label="Sections">
+          <a href="#mint"><span class="zh">铸造</span><span class="en x-inl">Mint</span></a>
+          <a href="#tiers"><span class="zh">等级</span><span class="en x-inl">Tiers</span></a>
+          <a href="#gallery"><span class="zh">画廊</span><span class="en x-inl">Gallery</span></a>
+          <a href="#unique"><span class="zh">独一无二</span><span class="en x-inl">Unique</span></a>
+          <a href="#lore"><span class="zh">传说</span><span class="en x-inl">Lore</span></a>
+          <a href="#agent">Agent <span class="zh">技能</span><span class="en x-inl">Skill</span></a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <div class="x-lang" role="group" aria-label="Language">
+          <button type="button" data-lang="both" aria-pressed="true">中/EN</button>
+          <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </header>
+
+      <main class="main">
+        <section class="hero">
+          <img class="hero__img" src="moondeng-hero.png" alt="Baby hippos flying past a full moon in the night sky" />
+          <div class="hero__copy">
+            <p class="hero__eyebrow x-bi">
+              <span class="zh">BNB Chain · 2,222 只 · Agent + 钱包都能铸造</span>
+              <span class="en">BNB Chain · 2,222 · Mint by agent or wallet</span>
+            </p>
+            <h1>Moondeng</h1>
+            <p class="hero__sub x-bi">
+              <span class="zh">月光下弹跳的小河马，2,222 只可爱 Moo Deng 降临 BNB 链。</span>
+              <span class="en">2,222 bouncy baby hippos under the moon, landing on BNB Chain.</span>
+            </p>
+            <div class="x-progress">
+              <div class="x-progress__top">
+                <span><span class="zh">已铸造</span><span class="en x-inl">Minted</span></span><b>0 / 2,222</b>
+              </div>
+              <div class="x-bar" role="progressbar" aria-label="Minted" aria-valuemin="0" aria-valuemax="2222" aria-valuenow="0"><span style="width: 0%"></span></div>
+            </div>
+            <p class="x-notice x-notice--live x-bi">
+              <span><span class="zh">铸造进行中</span><span class="en" style="display:block">Mint live</span><a href="https://bscscan.com/address/0x2b110eDf44534E063fCE1805b092FfacC0DF13F5" target="_blank" rel="noopener" style="display:block">0x2b110eDf44534E063fCE1805b092FfacC0DF13F5</a></span>
+            </p>
+            <div class="x-row">
+              <a class="x-btn x-btn--primary" href="#mint"><svg class="x-ico"><use href="#i-wallet"/></svg><span><span class="zh">用钱包铸造</span><span class="en x-inl">Mint with wallet</span></span></a>
+              <a class="x-btn" href="#agent"><svg class="x-ico"><use href="#i-bot"/></svg><span><span class="zh">用 Agent 铸造</span><span class="en x-inl">Mint with agent</span></span></a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="mint">
+          <div class="head">
+            <p class="head__eyebrow">Mint</p>
+            <h2 class="x-bi"><span class="zh">两种方式铸造</span><span class="en">Two ways to mint</span></h2>
+          </div>
+          <div class="x-ways">
+            <div class="x-card">
+              <span class="x-ibadge"><svg class="x-ico"><use href="#i-wallet"/></svg></span>
+              <h3 class="x-bi"><span class="zh">用钱包铸造</span><span class="en">Mint with wallet</span></h3>
+              <p class="x-bi"><span class="zh">连接钱包，选好等级和数量，直接铸造。</span><span class="en">Connect a wallet, pick a tier and quantity, and mint.</span></p>
+              <div class="x-row">
+                <a class="x-btn x-btn--primary" href="https://seocheckr.xyz/mint.html" target="_blank" rel="noopener"><svg class="x-ico"><use href="#i-sparkle"/></svg><span class="x-bi"><span class="zh">立即铸造</span><span class="en">Mint now</span></span></a>
+              </div>
+            </div>
+            <div class="x-card">
+              <span class="x-ibadge"><svg class="x-ico"><use href="#i-bot"/></svg></span>
+              <h3 class="x-bi"><span class="zh">用 Agent 铸造</span><span class="en">Mint with agent</span></h3>
+              <p class="x-bi"><span class="zh">交给 Binance Agentic Wallet，三步完成。</span><span class="en">Let a Binance Agentic Wallet do it, in three steps.</span></p>
+              <div class="x-row"><a class="x-btn" href="#agent"><svg class="x-ico"><use href="#i-arrow"/></svg><span><span class="zh">查看步骤</span><span class="en x-inl">See the steps</span></span></a></div>
+            </div>
+          </div>
+          <div class="x-tools">
+            <div class="x-card x-contract">
+              <div class="x-check__top">
+                <span class="x-ibadge"><svg class="x-ico"><use href="#i-shield"/></svg></span>
+                <h3 class="x-bi"><span class="zh">合约地址</span><span class="en">Contract address</span></h3>
+              </div>
+              <div class="x-code">
+                <code id="contract">0x2b110eDf44534E063fCE1805b092FfacC0DF13F5</code>
+                <button class="x-btn" type="button" data-copy="contract"><svg class="x-ico"><use href="#i-copy"/></svg><span><span class="zh">复制</span><span class="en x-inl">Copy</span></span></button>
+              </div>
+              <dl class="x-facts">
+                <div><dt><span class="zh">网络</span><span class="en x-inl">Network</span></dt><dd>BNB Smart Chain (Chain ID 56)</dd></div>
+                <div><dt><span class="zh">名称</span><span class="en x-inl">Name</span></dt><dd>Moondeng</dd></div>
+                <div><dt><span class="zh">代号</span><span class="en x-inl">Symbol</span></dt><dd>MOODENG</dd></div>
+                <div><dt><span class="zh">总量</span><span class="en x-inl">Supply</span></dt><dd>2,222</dd></div>
+              </dl>
+              <div class="x-row"><a class="x-btn" href="https://bscscan.com/address/0x2b110eDf44534E063fCE1805b092FfacC0DF13F5" target="_blank" rel="noopener"><svg class="x-ico"><use href="#i-arrow"/></svg><span><span class="zh">在 BscScan 查看</span><span class="en x-inl">View on BscScan</span></span></a></div>
+            </div>
+            <div class="x-card x-check">
+              <div class="x-check__top">
+                <span class="x-ibadge"><svg class="x-ico"><use href="#i-search"/></svg></span>
+                <h3 class="x-bi"><span class="zh">检查钱包资格</span><span class="en">Check a wallet</span></h3>
+              </div>
+              <p class="x-bi"><span class="zh">只读查询，无需连接钱包。</span><span class="en">Read-only, no wallet connection needed.</span></p>
+              <form class="x-checkform" id="checkform" novalidate>
+                <input id="addr" aria-label="Wallet address 钱包地址" type="text" inputmode="text" placeholder="0x…" autocomplete="off" autocapitalize="off" spellcheck="false" />
+                <button class="x-btn x-btn--primary" type="submit"><svg class="x-ico"><use href="#i-search"/></svg><span><span class="zh">检查</span><span class="en x-inl">Check</span></span></button>
+              </form>
+              <p class="x-checkmsg x-bi" id="checkmsg" role="status" hidden><svg class="x-ico"><use href="#i-clock"/></svg><span><span class="zh">开放铸造后可查询</span><span class="en" style="display:block">Available once mint opens</span></span></p>
+            </div>
+            <details class="x-dev">
+              <summary><svg class="x-ico"><use href="#i-code"/></svg><span class="x-bi"><span class="zh">开发者接口</span><span class="en">Developer interface (Solidity)</span></span><svg class="x-ico x-chev"><use href="#i-chevron"/></svg></summary>
+              <div class="x-dev__body">
+<pre id="dev"><span class="x-cmt">// BNB Smart Chain (56) · 0x2b110eDf44534E063fCE1805b092FfacC0DF13F5</span>
+freeMint(uint256 qty) payable <span class="x-cmt">// 0.0002 BNB each</span>
+mintTier(uint8 tier, uint256 qty) payable <span class="x-cmt">// tier 1–4: 0.001 / 0.002 / 0.003 / 0.004 BNB</span>
+<span class="x-cmt">// max 5 per wallet</span></pre>
+                <button class="x-btn" type="button" data-copy="dev"><svg class="x-ico"><use href="#i-copy"/></svg><span><span class="zh">复制</span><span class="en x-inl">Copy</span></span></button>
+              </div>
+            </details>
+          </div>
+          <p class="fineprint x-bi">
+            <span class="zh">每个钱包最多 5 只。</span>
+            <span class="en">Max 5 per wallet.</span>
+          </p>
+        </section>
+
+        <section class="section" id="tiers">
+          <div class="head">
+            <p class="head__eyebrow">Tiers</p>
+            <h2 class="x-bi"><span class="zh">五个等级，选一只你的河马</span><span class="en">Five tiers, pick your hippo</span></h2>
+          </div>
+
+          <div class="x-card x-free x-acc-free">
+            <figure class="x-freeimg"><img src="moondeng-splash.png" alt="Free mint: a baby hippo, look chosen at random" /><span class="x-ribbon" aria-hidden="true">FREE</span></figure>
+            <div style="display:grid;gap:8px">
+              <h3 class="x-bi"><span class="zh">免费铸造</span><span class="en">Free Mint</span></h3>
+              <p class="x-price">0.0002 BNB<small><span class="zh">仅手续费 + Gas</span><span class="en x-inl">fee + gas only</span></small></p>
+              <p class="x-random x-bi"><span class="zh">免费铸造的河马造型随机。</span><span class="en">Free mints get a random look.</span></p>
+            </div>
+            <div class="x-buy">
+              <div class="x-stepper" data-stepper>
+                <button type="button" data-step="-1" aria-label="Fewer">−</button><output aria-live="polite">1</output><button type="button" data-step="1" aria-label="More">+</button>
+              </div>
+              <a class="x-btn x-btn--tier" href="https://seocheckr.xyz/mint.html" target="_blank" rel="noopener"><svg class="x-ico"><use href="#i-sparkle"/></svg><span class="x-bi"><span class="zh">立即铸造 · 0.0002 BNB</span><span class="en">Mint now · 0.0002 BNB</span></span></a>
+            </div>
+          </div>
+
+          <div class="x-tiers" id="gallery">
+            <article class="x-card x-tier x-acc-splash">
+              <figure><img src="moondeng-splash.png" alt="Splash tier: a baby hippo splashing water" /></figure>
+              <div>
+                <h3 class="x-bi"><span class="en">Splash</span><span class="zh">泼水河马</span></h3>
+                <p class="x-price">0.001 BNB</p>
+                <div class="x-buy">
+                  <div class="x-stepper" data-stepper><button type="button" data-step="-1" aria-label="Fewer">−</button><output aria-live="polite">1</output><button type="button" data-step="1" aria-label="More">+</button></div>
+                  <a class="x-btn x-btn--tier" href="https://seocheckr.xyz/mint.html" target="_blank" rel="noopener"><svg class="x-ico"><use href="#i-sparkle"/></svg><span class="x-bi"><span class="zh">立即铸造 · 0.001 BNB</span><span class="en">Mint now · 0.001 BNB</span></span></a>
+                </div>
+              </div>
+            </article>
+            <article class="x-card x-tier x-acc-cool">
+              <figure><img src="moondeng-cool.png" alt="Cool tier: a baby hippo in sunglasses" /></figure>
+              <div>
+                <h3 class="x-bi"><span class="en">Cool</span><span class="zh">墨镜河马</span></h3>
+                <p class="x-price">0.002 BNB</p>
+                <div class="x-buy">
+                  <div class="x-stepper" data-stepper><button type="button" data-step="-1" aria-label="Fewer">−</button><output aria-live="polite">1</output><button type="button" data-step="1" aria-label="More">+</button></div>
+                  <a class="x-btn x-btn--tier" href="https://seocheckr.xyz/mint.html" target="_blank" rel="noopener"><svg class="x-ico"><use href="#i-sparkle"/></svg><span class="x-bi"><span class="zh">立即铸造 · 0.002 BNB</span><span class="en">Mint now · 0.002 BNB</span></span></a>
+                </div>
+              </div>
+            </article>
+            <article class="x-card x-tier x-acc-astro">
+              <figure><img src="moondeng-astro.png" alt="Astro tier: a baby hippo astronaut" /></figure>
+              <div>
+                <h3 class="x-bi"><span class="en">Astro</span><span class="zh">太空河马</span></h3>
+                <p class="x-price">0.003 BNB</p>
+                <div class="x-buy">
+                  <div class="x-stepper" data-stepper><button type="button" data-step="-1" aria-label="Fewer">−</button><output aria-live="polite">1</output><button type="button" data-step="1" aria-label="More">+</button></div>
+                  <a class="x-btn x-btn--tier" href="https://seocheckr.xyz/mint.html" target="_blank" rel="noopener"><svg class="x-ico"><use href="#i-sparkle"/></svg><span class="x-bi"><span class="zh">立即铸造 · 0.003 BNB</span><span class="en">Mint now · 0.003 BNB</span></span></a>
+                </div>
+              </div>
+            </article>
+            <article class="x-card x-tier x-acc-king">
+              <figure><img src="moondeng-king.png" alt="King tier: a baby hippo wearing a crown" /></figure>
+              <div>
+                <h3 class="x-bi"><span class="en">King</span><span class="zh">河马国王</span></h3>
+                <p class="x-price">0.004 BNB</p>
+                <div class="x-buy">
+                  <div class="x-stepper" data-stepper><button type="button" data-step="-1" aria-label="Fewer">−</button><output aria-live="polite">1</output><button type="button" data-step="1" aria-label="More">+</button></div>
+                  <a class="x-btn x-btn--tier" href="https://seocheckr.xyz/mint.html" target="_blank" rel="noopener"><svg class="x-ico"><use href="#i-sparkle"/></svg><span class="x-bi"><span class="zh">立即铸造 · 0.004 BNB</span><span class="en">Mint now · 0.004 BNB</span></span></a>
+                </div>
+              </div>
+            </article>
+          </div>
+          <p class="fineprint x-bi"><span class="zh">每次可铸造 1–5 只。</span><span class="en">Mint 1–5 at a time.</span></p>
+          <p class="fineprint x-bi"><span class="zh">请在 MetaMask、Trust Wallet 或 Binance 钱包浏览器中打开 · 每个钱包最多 5 个</span><span class="en">Open in MetaMask, Trust Wallet or Binance Wallet browser · max 5 per wallet</span></p>
+        </section>
+
+        <section class="section" id="unique">
+          <div class="head">
+            <p class="head__eyebrow">Unique</p>
+            <h2 class="x-bi"><span class="zh">2,222 只，每只都不一样</span><span class="en">2,222 hippos, every one unique</span></h2>
+            <p class="head__sub x-bi"><span class="zh">每只都由背景、皮肤、头饰、配饰等特征组合而成，铸造时随机生成</span><span class="en">Each one combines background, skin, headwear and extras, randomised at mint</span></p>
+          </div>
+          <div class="x-card x-feat" id="feat" aria-live="polite">
+            <span class="x-art" id="feat-art"></span>
+            <div class="x-feat__info">
+              <p class="x-feat__top"><span class="x-no" id="feat-no"></span><span class="x-tag" id="feat-tag"></span></p>
+              <div class="breakdown x-traits"><dl id="feat-traits"></dl></div>
+              <button class="x-btn x-btn--primary" type="button" id="roll"><svg class="x-ico"><use href="#i-sparkle"/></svg><span><span class="zh">再随机一只</span><span class="en x-inl">Roll a random hippo</span></span></button>
+            </div>
+          </div>
+          <div class="x-nfts" id="nfts">
+            <button class="x-nft x-acc-free" type="button" data-t="1" aria-label="Moondeng #0001, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-01.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0001</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="2" aria-label="Moondeng #0002, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-02.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0002</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="3" aria-label="Moondeng #0003, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-03.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0003</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="4" aria-label="Moondeng #0004, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-04.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0004</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-king" type="button" data-t="5" aria-label="Moondeng #0005, King — 查看特征 view traits"><span class="x-art"><img src="hippo-05.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0005</span><span class="x-tag">King</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="6" aria-label="Moondeng #0006, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-06.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0006</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="7" aria-label="Moondeng #0007, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-07.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0007</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="8" aria-label="Moondeng #0008, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-08.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0008</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="9" aria-label="Moondeng #0009, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-09.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0009</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="10" aria-label="Moondeng #0010, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-10.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0010</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-astro" type="button" data-t="11" aria-label="Moondeng #0011, Astro — 查看特征 view traits"><span class="x-art"><img src="hippo-11.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0011</span><span class="x-tag">Astro</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="12" aria-label="Moondeng #0012, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-12.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0012</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="13" aria-label="Moondeng #0013, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-13.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0013</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="14" aria-label="Moondeng #0014, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-14.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0014</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="15" aria-label="Moondeng #0015, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-15.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0015</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-king" type="button" data-t="16" aria-label="Moondeng #0016, King — 查看特征 view traits"><span class="x-art"><img src="hippo-16.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0016</span><span class="x-tag">King</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="17" aria-label="Moondeng #0017, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-17.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0017</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="18" aria-label="Moondeng #0018, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-18.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0018</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="19" aria-label="Moondeng #0019, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-19.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0019</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="20" aria-label="Moondeng #0020, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-20.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0020</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="21" aria-label="Moondeng #0021, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-21.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0021</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="22" aria-label="Moondeng #0022, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-22.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0022</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="23" aria-label="Moondeng #0023, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-23.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0023</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="24" aria-label="Moondeng #0024, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-24.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0024</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="25" aria-label="Moondeng #0025, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-25.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0025</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-king" type="button" data-t="26" aria-label="Moondeng #0026, King — 查看特征 view traits"><span class="x-art"><img src="hippo-26.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0026</span><span class="x-tag">King</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="27" aria-label="Moondeng #0027, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-27.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0027</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-astro" type="button" data-t="28" aria-label="Moondeng #0028, Astro — 查看特征 view traits"><span class="x-art"><img src="hippo-28.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0028</span><span class="x-tag">Astro</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="29" aria-label="Moondeng #0029, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-29.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0029</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="30" aria-label="Moondeng #0030, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-30.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0030</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="31" aria-label="Moondeng #0031, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-31.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0031</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="32" aria-label="Moondeng #0032, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-32.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0032</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="33" aria-label="Moondeng #0033, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-33.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0033</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="34" aria-label="Moondeng #0034, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-34.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0034</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="35" aria-label="Moondeng #0035, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-35.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0035</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="36" aria-label="Moondeng #0036, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-36.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0036</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="37" aria-label="Moondeng #0037, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-37.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0037</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="38" aria-label="Moondeng #0038, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-38.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0038</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-king" type="button" data-t="39" aria-label="Moondeng #0039, King — 查看特征 view traits"><span class="x-art"><img src="hippo-39.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0039</span><span class="x-tag">King</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="40" aria-label="Moondeng #0040, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-40.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0040</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="41" aria-label="Moondeng #0041, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-41.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0041</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="42" aria-label="Moondeng #0042, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-42.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0042</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="43" aria-label="Moondeng #0043, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-43.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0043</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-astro" type="button" data-t="44" aria-label="Moondeng #0044, Astro — 查看特征 view traits"><span class="x-art"><img src="hippo-44.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0044</span><span class="x-tag">Astro</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="45" aria-label="Moondeng #0045, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-45.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0045</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="46" aria-label="Moondeng #0046, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-46.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0046</span><span class="x-tag">Free</span></span></button>
+            <button class="x-nft x-acc-splash" type="button" data-t="47" aria-label="Moondeng #0047, Splash — 查看特征 view traits"><span class="x-art"><img src="hippo-47.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0047</span><span class="x-tag">Splash</span></span></button>
+            <button class="x-nft x-acc-king" type="button" data-t="48" aria-label="Moondeng #0048, King — 查看特征 view traits"><span class="x-art"><img src="hippo-48.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0048</span><span class="x-tag">King</span></span></button>
+            <button class="x-nft x-acc-cool" type="button" data-t="49" aria-label="Moondeng #0049, Cool — 查看特征 view traits"><span class="x-art"><img src="hippo-49.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0049</span><span class="x-tag">Cool</span></span></button>
+            <button class="x-nft x-acc-free" type="button" data-t="50" aria-label="Moondeng #0050, Free — 查看特征 view traits"><span class="x-art"><img src="hippo-50.png" alt="" loading="lazy" decoding="async" width="320" height="320" /></span><span class="x-nft__meta"><span class="x-no">#0050</span><span class="x-tag">Free</span></span></button>
+          </div>
+          <p class="fineprint x-bi"><span class="zh">#0001–#0050 示例，点击查看特征。</span><span class="en">#0001–#0050 shown; tap one for its traits.</span></p>
+        </section>
+
+        <section class="section" id="lore">
+          <div class="head">
+            <p class="head__eyebrow">Lore</p>
+            <h2 class="x-bi"><span class="zh">满月传说</span><span class="en">The full-moon legend</span></h2>
+          </div>
+          <div class="x-lore">
+            <div class="x-moon" aria-hidden="true"><svg class="x-ico"><use href="#i-sparkle"/></svg></div>
+            <p class="x-bi">
+              <span class="zh">每到满月，Moo Deng 的孩子们就会从泥塘里弹上月亮。2,222 只小河马在月光下找回自己的造型——泼水的、戴墨镜的、去太空的，还有戴上王冠的国王。</span>
+              <span class="en">Every full moon, Moo Deng's little ones bounce from the mud pond up to the moon. 2,222 baby hippos find their look in the moonlight — splashers, cool kids, astronauts, and crowned kings.</span>
+            </p>
+          </div>
+        </section>
+
+        <section class="section" id="agent">
+          <div class="head">
+            <p class="head__eyebrow">Agent Skill</p>
+            <h2 class="x-bi"><span class="zh">Agent 技能</span><span class="en">Agent Skill</span></h2>
+            <p class="head__sub x-bi"><span class="zh">用 Binance Agentic Wallet 铸造。</span><span class="en">Mint with Binance Agentic Wallet.</span></p>
+          </div>
+          <div class="x-card x-skill">
+            <div class="x-check__top">
+              <span class="x-ibadge"><svg class="x-ico"><use href="#i-bot"/></svg></span>
+              <h3 class="x-bi"><span class="zh">安装铸造技能</span><span class="en">Install the mint skill</span></h3>
+            </div>
+            <div class="x-code">
+              <code id="skill">安装 Moondeng 铸造技能 / Install the Moondeng mint skill</code>
+              <button class="x-btn" type="button" data-copy="skill"><svg class="x-ico"><use href="#i-copy"/></svg><span><span class="zh">复制</span><span class="en x-inl">Copy</span></span></button>
+            </div>
+            <p class="x-note x-bi"><svg class="x-ico"><use href="#i-clock"/></svg><span><span class="zh">技能文件将随合约一起发布</span><span class="en x-inl">Skill file releases with the contract</span></span></p>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <div class="step__intro"><p class="step__num">01</p><p class="step__eyebrow">Binance App</p></div>
+              <div>
+                <h3 class="x-bi"><span class="zh">领取 Agent ID</span><span class="en">Claim your Agent ID</span></h3>
+                <p class="x-bi">
+                  <span class="zh">打开 Binance App → 智能体钱包（Agentic Wallet）→ 领取 .ai Agent ID，并开启开发者模式。</span>
+                  <span class="en">Binance app → Agentic Wallet → claim your .ai Agent ID, turn on Developer Mode.</span>
+                </p>
+              </div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">02</p><p class="step__eyebrow">Terminal</p></div>
+              <div>
+                <h3 class="x-bi"><span class="zh">安装钱包技能</span><span class="en">Install the wallet skill</span></h3>
+                <p class="x-bi" style="margin-bottom:12px"><span class="zh">在你的 Agent 环境中运行：</span><span class="en">In your agent's environment run:</span></p>
+                <div class="x-code">
+                  <code id="cmd">npx skills add binance/binance-skills-hub/skills/binance-web3/binance-agentic-wallet</code>
+                  <button class="x-btn" type="button" data-copy="cmd"><svg class="x-ico"><use href="#i-copy"/></svg><span><span class="zh">复制</span><span class="en x-inl">Copy</span></span></button>
+                </div>
+              </div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">03</p><p class="step__eyebrow">Agent</p></div>
+              <div>
+                <h3 class="x-bi"><span class="zh">把下面的消息发给你的 Agent</span><span class="en">Send this message to your agent</span></h3>
+                <div class="x-prompt">
+                  <div class="x-prompt__bar">
+                    <div class="x-tabs" role="tablist" aria-label="Message language">
+                      <button type="button" role="tab" id="tab-zh" aria-selected="true" aria-controls="prompt-zh">中文</button>
+                      <button type="button" role="tab" id="tab-en" aria-selected="false" aria-controls="prompt-en">EN</button>
+                    </div>
+                    <button class="x-btn" type="button" data-copy="prompt"><svg class="x-ico"><use href="#i-copy"/></svg><span><span class="zh">复制</span><span class="en x-inl">Copy</span></span></button>
+                  </div>
+                  <p role="tabpanel" id="prompt-zh" aria-labelledby="tab-zh">请用我的 Binance Agentic Wallet 在 BNB Chain 上铸造 Moondeng NFT。网络：BNB Smart Chain（Chain ID 56）。合约地址：0x2b110eDf44534E063fCE1805b092FfacC0DF13F5。免费铸造调用 freeMint(qty)，每只 0.0002 BNB；付费铸造调用 mintTier(tier, qty)，tier 1–4 每只分别为 0.001 / 0.002 / 0.003 / 0.004 BNB。每个钱包最多 5 只。发送前先用 eth_call 模拟，不要批准任何代币授权，也不要签署任何消息。</p>
+                  <p role="tabpanel" id="prompt-en" aria-labelledby="tab-en" hidden>Use my Binance Agentic Wallet to mint Moondeng NFTs on BNB Chain. Network: BNB Smart Chain (Chain ID 56). Contract: 0x2b110eDf44534E063fCE1805b092FfacC0DF13F5. Free mint: call freeMint(qty) at 0.0002 BNB per NFT; paid mint: call mintTier(tier, qty) with tier 1–4 at 0.001 / 0.002 / 0.003 / 0.004 BNB per NFT. Max 5 per wallet. Simulate with eth_call first, never approve tokens or sign messages.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="faq">
+          <div class="head">
+            <p class="head__eyebrow">FAQ</p>
+            <h2 class="x-bi"><span class="zh">常见问题</span><span class="en">Questions</span></h2>
+          </div>
+          <div class="x-faq">
+            <details>
+              <summary><span class="x-bi"><span class="zh">可以不用 Agent 铸造吗？</span><span class="en">Can I mint without an agent?</span></span><svg class="x-ico x-chev"><use href="#i-chevron"/></svg></summary>
+              <p class="x-bi"><span class="zh">可以，连接钱包直接铸造，或交给 Binance Agentic Wallet。</span><span class="en">Yes — connect a wallet and mint directly, or let a Binance Agentic Wallet do it.</span></p>
+            </details>
+            <details>
+              <summary><span class="x-bi"><span class="zh">免费铸造真的免费吗？</span><span class="en">Is free mint really free?</span></span><svg class="x-ico x-chev"><use href="#i-chevron"/></svg></summary>
+              <p class="x-bi"><span class="zh">只需 0.0002 BNB 手续费 + Gas。</span><span class="en">You pay only a 0.0002 BNB fee plus gas.</span></p>
+            </details>
+            <details>
+              <summary><span class="x-bi"><span class="zh">各等级有什么区别？</span><span class="en">What's the difference between tiers?</span></span><svg class="x-ico x-chev"><use href="#i-chevron"/></svg></summary>
+              <p class="x-bi"><span class="zh">付费等级 0.001–0.004 BNB 对应不同造型（Splash、Cool、Astro、King）。</span><span class="en">Paid tiers 0.001–0.004 BNB map to different looks (Splash, Cool, Astro, King).</span></p>
+            </details>
+            <details>
+              <summary><span class="x-bi"><span class="zh">总量多少？</span><span class="en">Total supply?</span></span><svg class="x-ico x-chev"><use href="#i-chevron"/></svg></summary>
+              <p class="x-bi"><span class="zh">2,222 只。</span><span class="en">2,222.</span></p>
+            </details>
+            <details>
+              <summary><span class="x-bi"><span class="zh">每只都不一样吗？</span><span class="en">Is every one unique?</span></span><svg class="x-ico x-chev"><use href="#i-chevron"/></svg></summary>
+              <p class="x-bi"><span class="zh">是的，2,222 只各不相同，每只都由背景、皮肤、头饰、配饰等特征组合而成，铸造时随机生成。</span><span class="en">Yes, all 2,222 are distinct: each combines background, skin, headwear and extras, randomised at mint.</span></p>
+            </details>
+            <details>
+              <summary><svg class="x-ico"><use href="#i-shield"/></svg><span class="x-bi"><span class="zh">如何防骗？</span><span class="en">How do I stay safe?</span></span><svg class="x-ico x-chev"><use href="#i-chevron"/></svg></summary>
+              <p class="x-bi"><span class="zh">只使用官网公布的合约地址；铸造不需要代币授权或签名消息。</span><span class="en">Only use the contract published on this site; minting never needs token approvals or signed messages.</span></p>
+            </details>
+          </div>
+        </section>
+      </main>
+      <footer class="foot">
+        <p>Moondeng · 月光小河马 · BNB Smart Chain (56) · 合约 Contract: <a href="https://bscscan.com/address/0x2b110eDf44534E063fCE1805b092FfacC0DF13F5" target="_blank" rel="noopener" class="x-footaddr">0x2b110eDf44534E063fCE1805b092FfacC0DF13F5</a> · © 2026</p>
+        <a class="badge" href="https://hark.com/" target="_blank" rel="noopener"><span class="hark-mark"></span><span>built by hark</span></a>
+      </footer>
+    </div>
+    <dialog class="x-modal" id="nftmodal" aria-labelledby="m-title">
+      <div class="x-modal__body">
+        <span class="x-art" id="m-art"></span>
+        <div class="x-feat__info">
+          <div class="x-modal__head">
+            <p class="x-feat__top" id="m-title"><span class="x-no" id="m-no"></span><span class="x-tag" id="m-tag"></span></p>
+            <button class="x-close" type="button" id="m-close" aria-label="关闭 Close"><svg class="x-ico"><use href="#i-x"/></svg></button>
+          </div>
+          <div class="breakdown x-traits"><dl id="m-traits"></dl></div>
+        </div>
+      </div>
+    </dialog>
+    <a class="x-btn x-btn--primary x-fab" href="#mint"><svg class="x-ico"><use href="#i-sparkle"/></svg><span><span class="zh">立即铸造</span><span class="en x-inl">Mint now</span></span></a>
+    <script src="hark.js"></script>
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var langBtns = document.querySelectorAll(".x-lang button");
+        function setTab(lang) {
+          ["zh", "en"].forEach(function (l) {
+            document.getElementById("tab-" + l).setAttribute("aria-selected", l === lang ? "true" : "false");
+            document.getElementById("prompt-" + l).hidden = l !== lang;
+          });
+        }
+        langBtns.forEach(function (b) {
+          b.addEventListener("click", function () {
+            var lang = b.getAttribute("data-lang");
+            root.setAttribute("data-lang", lang);
+            root.setAttribute("lang", lang === "en" ? "en" : "zh-Hans");
+            langBtns.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+            if (lang !== "both") setTab(lang);
+          });
+        });
+        document.querySelectorAll(".x-tabs button").forEach(function (t) {
+          t.addEventListener("click", function () { setTab(t.id.replace("tab-", "")); });
+        });
+
+        document.querySelectorAll("[data-stepper]").forEach(function (s) {
+          var out = s.querySelector("output"), btns = s.querySelectorAll("button");
+          function sync() {
+            var v = +out.textContent;
+            btns[0].disabled = v <= 1;
+            btns[1].disabled = v >= 5;
+          }
+          btns.forEach(function (b) {
+            b.addEventListener("click", function () {
+              var v = Math.min(5, Math.max(1, +out.textContent + +b.getAttribute("data-step")));
+              out.textContent = v;
+              sync();
+            });
+          });
+          sync();
+        });
+
+        function copyText(text, done) {
+          fallback(text);
+          done();
+          try { if (navigator.clipboard) navigator.clipboard.writeText(text).catch(function () {}); } catch (e) {}
+        }
+        function fallback(text) {
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); } catch (e) {}
+          document.body.removeChild(ta);
+        }
+        document.querySelectorAll("[data-copy]").forEach(function (b) {
+          var original = b.innerHTML;
+          b.addEventListener("click", function () {
+            var id = b.getAttribute("data-copy"), el;
+            if (id === "prompt") el = document.querySelector(".x-prompt p:not([hidden])");
+            else el = document.getElementById(id);
+            copyText(el.textContent.trim(), function () {
+              clearTimeout(b._t);
+              b.classList.add("is-copied");
+              b.innerHTML = '<svg class="x-ico"><use href="#i-check"/></svg><span><span class="zh">已复制</span><span class="en x-inl">Copied</span></span>';
+              b._t = setTimeout(function () { b.innerHTML = original; b.classList.remove("is-copied"); }, 1500);
+            });
+          });
+        });
+
+        var form = document.getElementById("checkform"), msg = document.getElementById("checkmsg");
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          msg.hidden = false;
+        });
+      })();
+    </script>
+    <script type="application/json" id="hippo-data">
+      [["Free","grey","pink","red baseball cap","gold chain"],
+       ["Splash","pink","mint","flower crown","eating lettuce"],
+       ["Cool","grey","starry navy","astronaut helmet","laser eyes"],
+       ["Free","lilac","sky blue","headphones","bubblegum"],
+       ["King","golden","purple","king crown","red cape"],
+       ["Splash","grey","sunset orange","viking helmet","scarf"],
+       ["Cool","mint","cream","chef hat","bow tie"],
+       ["Free","grey","yellow","heart sunglasses","pearl necklace"],
+       ["Free","grey","teal","wizard hat","sleepy eyes"],
+       ["Splash","pink","lavender","halo","angel wings"],
+       ["Astro","cosmic galaxy","space black","none","3D glasses"],
+       ["Cool","grey","green","beanie","water splash"],
+       ["Free","zombie green","dark purple","none","stitches, tongue out"],
+       ["Splash","grey","light blue","party hat","confetti"],
+       ["Cool","lilac","peach","pirate hat","eyepatch"],
+       ["King","golden","red","none","BNB coin necklace, star eyes"],
+       ["Free","grey","mud brown","none","mud splash, laughing"],
+       ["Free","pink","cloud white","cowboy hat","bandana"],
+       ["Splash","grey","cyan","snorkel mask","swim ring"],
+       ["Cool","mint","pink","cat ears","winking"],
+       ["Free","grey","dark blue","ninja headband","katana"],
+       ["Splash","lilac","gold","top hat","monocle"],
+       ["Cool","grey","jungle green","leaf crown","watermelon"],
+       ["Free","pink","neon purple","DJ headphones","gold chain"],
+       ["Free","grey","orange","hard hat","safety vest"],
+       ["King","golden","starry purple","moon crown","none"],
+       ["Splash","grey","pastel pink","nurse cap","surprised"],
+       ["Astro","cosmic galaxy","deep blue","halo","glowing eyes"],
+       ["Cool","grey","red","sweatband","boxing gloves"],
+       ["Free","pink","sky blue","graduation cap","round glasses"],
+       ["Splash","grey","yellow","banana","tongue out"],
+       ["Cool","lilac","mint","santa hat","scarf"],
+       ["Free","zombie green","black","witch hat","pumpkin"],
+       ["Free","grey","teal","sailor hat","anchor necklace"],
+       ["Splash","pink","gold","tiara","pearl necklace"],
+       ["Cool","grey","light green","frog hat","sleepy eyes"],
+       ["Free","mint","red","firefighter helmet","none"],
+       ["Splash","grey","lavender","samurai helmet","none"],
+       ["King","golden","black","none","sunglasses, diamond chain"],
+       ["Cool","lilac","orange","bucket hat","ice cream"],
+       ["Free","grey","cream","detective hat","bubble pipe"],
+       ["Free","pink","navy","goggles","rocket backpack"],
+       ["Splash","grey","mint","sprout","none"],
+       ["Astro","cosmic galaxy","pink","star crown","none"],
+       ["Cool","grey","blue","fishbowl helmet","none"],
+       ["Free","lilac","green","antenna","laser eyes"],
+       ["Splash","grey","peach","chef hat","cake"],
+       ["King","golden","white","laurel wreath","toga"],
+       ["Cool","grey","purple","jester hat","none"],
+       ["Free","pink","yellow","straw hat","overalls"]]
+    </script>
+    <script>
+      /* Moondeng gallery: 50 illustrated hippos */
+      (function () {
+        var D = JSON.parse(document.getElementById("hippo-data").textContent);
+        var ZH = {
+          "none": "无", "grey": "灰色", "pink": "粉色", "lilac": "淡紫", "mint": "薄荷绿", "golden": "黄金", "cosmic galaxy": "宇宙星河", "zombie green": "僵尸绿",
+          "starry navy": "星空藏青", "sky blue": "天空蓝", "purple": "紫色", "sunset orange": "日落橙", "cream": "奶油色", "yellow": "黄色", "teal": "青绿", "lavender": "薰衣草紫",
+          "space black": "太空黑", "green": "绿色", "dark purple": "深紫", "light blue": "浅蓝", "peach": "蜜桃色", "red": "红色", "mud brown": "泥巴棕", "cloud white": "云朵白",
+          "cyan": "青色", "dark blue": "深蓝", "gold": "金色", "jungle green": "丛林绿", "neon purple": "霓虹紫", "orange": "橙色", "starry purple": "星空紫", "pastel pink": "粉彩粉",
+          "deep blue": "湛蓝", "black": "黑色", "light green": "浅绿", "navy": "藏青", "blue": "蓝色", "white": "白色",
+          "red baseball cap": "红色棒球帽", "flower crown": "花冠", "astronaut helmet": "宇航员头盔", "headphones": "耳机", "king crown": "国王王冠", "viking helmet": "维京头盔",
+          "chef hat": "厨师帽", "heart sunglasses": "爱心墨镜", "wizard hat": "巫师帽", "halo": "光环", "beanie": "毛线帽", "party hat": "派对帽", "pirate hat": "海盗帽",
+          "cowboy hat": "牛仔帽", "snorkel mask": "浮潜面罩", "cat ears": "猫耳朵", "ninja headband": "忍者头带", "top hat": "高礼帽", "leaf crown": "树叶冠", "DJ headphones": "DJ 耳机",
+          "hard hat": "安全帽", "moon crown": "月亮王冠", "nurse cap": "护士帽", "sweatband": "运动头带", "graduation cap": "学士帽", "banana": "香蕉", "santa hat": "圣诞帽",
+          "witch hat": "女巫帽", "sailor hat": "水手帽", "tiara": "小皇冠", "frog hat": "青蛙帽", "firefighter helmet": "消防头盔", "samurai helmet": "武士头盔", "bucket hat": "渔夫帽",
+          "detective hat": "侦探帽", "goggles": "护目镜", "sprout": "小嫩芽", "star crown": "星星王冠", "fishbowl helmet": "鱼缸头盔", "antenna": "触角天线", "jester hat": "小丑帽",
+          "laurel wreath": "月桂花环", "straw hat": "草帽",
+          "gold chain": "金链子", "eating lettuce": "吃生菜", "laser eyes": "激光眼", "bubblegum": "泡泡糖", "red cape": "红披风", "scarf": "围巾", "bow tie": "领结",
+          "pearl necklace": "珍珠项链", "sleepy eyes": "困困眼", "angel wings": "天使翅膀", "3D glasses": "3D 眼镜", "water splash": "水花", "stitches, tongue out": "缝线、吐舌头",
+          "confetti": "彩纸屑", "eyepatch": "眼罩", "BNB coin necklace, star eyes": "BNB 币项链、星星眼", "mud splash, laughing": "泥巴飞溅、大笑", "bandana": "方头巾",
+          "swim ring": "游泳圈", "winking": "眨眼", "katana": "武士刀", "monocle": "单片眼镜", "watermelon": "西瓜", "safety vest": "安全背心", "surprised": "惊讶",
+          "glowing eyes": "发光眼", "boxing gloves": "拳击手套", "round glasses": "圆框眼镜", "tongue out": "吐舌头", "pumpkin": "南瓜", "anchor necklace": "船锚项链",
+          "ice cream": "冰淇淋", "sunglasses, diamond chain": "墨镜、钻石链", "bubble pipe": "泡泡烟斗", "rocket backpack": "火箭背包", "cake": "蛋糕", "toga": "罗马长袍", "overalls": "背带裤"
+        };
+        var CATS = [[0, "等级", "Tier"], [1, "皮肤", "Skin"], [2, "背景", "Background"], [3, "头饰", "Headwear"], [4, "配饰", "Extra"]];
+        var RARE = { "golden": 1, "cosmic galaxy": 1, "zombie green": 1 };
+        var grid = document.getElementById("nfts");
+        var imgs = grid.querySelectorAll(".x-art img");
+        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function pad(n) { return "#" + String(n).padStart(4, "0"); }
+        function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+        function rows(o) {
+          return CATS.map(function (c) {
+            var v = o[c[0]], dd;
+            if (c[0] === 0) dd = '<span class="x-tag x-acc-' + v.toLowerCase() + '">' + v + "</span>";
+            else dd = '<span class="zh">' + (ZH[v] || v) + '</span><span class="en x-inl">' + cap(v) + "</span>" + (c[0] === 1 && RARE[v] ? '<span class="x-rare">稀有 Rare</span>' : "");
+            return '<div class="row"><dt><span class="zh">' + c[1] + '</span><span class="en x-inl">' + c[2] + "</span></dt><dd>" + dd + "</dd></div>";
+          }).join("");
+        }
+        function setAcc(el, tier) {
+          el.className = el.className.replace(/\bx-acc-\w+/g, "").trim() + " x-acc-" + tier.toLowerCase();
+        }
+        // the art is a copy of the grid's own image, so no new file is requested
+        function setArt(box, n) {
+          var img = imgs[n - 1].cloneNode(false);
+          img.setAttribute("loading", "eager");
+          img.alt = "Moondeng " + pad(n);
+          box.replaceChildren(img);
+        }
+        function show(n, ids, box) {
+          var o = D[n - 1];
+          setArt(document.getElementById(ids + "-art"), n);
+          document.getElementById(ids + "-no").textContent = pad(n);
+          var tag = document.getElementById(ids + "-tag");
+          tag.textContent = o[0];
+          setAcc(tag, o[0]);
+          document.getElementById(ids + "-traits").innerHTML = rows(o);
+          setAcc(box, o[0]);
+        }
+
+        // modal
+        var dlg = document.getElementById("nftmodal");
+        function openModal(n) {
+          show(n, "m", dlg);
+          if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+        }
+        function closeModal() { if (dlg.close) dlg.close(); else dlg.removeAttribute("open"); }
+        grid.addEventListener("click", function (e) {
+          var b = e.target.closest(".x-nft");
+          if (b) openModal(+b.getAttribute("data-t"));
+        });
+        document.getElementById("m-close").addEventListener("click", closeModal);
+        dlg.addEventListener("click", function (e) { if (e.target === dlg) closeModal(); });
+
+        // featured roll: one of the 50, after a quick shuffle
+        var feat = document.getElementById("feat"), featArt = document.getElementById("feat-art"), cur = 0, busy = false;
+        function rand() { return 1 + Math.floor(Math.random() * D.length); }
+        function land(n) {
+          show(n, "feat", feat);
+          feat.classList.remove("is-shuffling");
+          feat.removeAttribute("aria-busy");
+          featArt.classList.remove("is-pop");
+          void featArt.offsetWidth;
+          featArt.classList.add("is-pop");
+          busy = false;
+        }
+        function roll(animate) {
+          if (busy) return;
+          var n;
+          do { n = rand(); } while (n === cur);
+          cur = n;
+          if (!animate || reduce) { land(n); return; }
+          busy = true;
+          feat.setAttribute("aria-busy", "true");
+          feat.classList.add("is-shuffling");
+          var k = 0, last = cur;
+          (function tick() {
+            if (k >= 9) { land(n); return; }
+            var m;
+            do { m = rand(); } while (m === last || m === n);
+            last = m;
+            setArt(featArt, m);
+            document.getElementById("feat-no").textContent = pad(m);
+            k++;
+            setTimeout(tick, 50 + k * 14);
+          })();
+        }
+        document.getElementById("roll").addEventListener("click", function () { roll(true); });
+        roll(false);
+      })();
+    </script>
+  </body>
+</html>
