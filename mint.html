@@ -13,7 +13,7 @@
 const CA="0x2b110eDf44534E063fCE1805b092FfacC0DF13F5",P=["0.0002","0.001","0.002","0.003","0.004"];
 const ABI=["function freeMint(uint256) payable","function mintTier(uint8,uint256) payable","function totalMinted() view returns (uint256)","function mintOpen() view returns (bool)"];
 const L=t=>document.getElementById('log').textContent=t;let c;
-const ro=new ethers.Contract(CA,ABI,new ethers.JsonRpcProvider("https://bsc-dataseed.bnbchain.org"));
+const ro=new ethers.Contract(CA,ABI,new ethers.FallbackProvider([new ethers.JsonRpcProvider("https://bsc-rpc.publicnode.com",56,{staticNetwork:true}),new ethers.JsonRpcProvider("https://bsc-dataseed.bnbchain.org",56,{staticNetwork:true})],56,{quorum:1}));
 ro.totalMinted().then(n=>document.getElementById('sup').textContent="Minted: "+n+" / 2,222").catch(()=>{});
 async function conn(){if(!window.ethereum){L("Wallet tidak ditemukan. Buka halaman ini di browser wallet.");return}
 try{await ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x38"}]})}catch(e){}
