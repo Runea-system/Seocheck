@@ -5,11 +5,12 @@
 <button id="c">1. Hubungkan wallet</button>
 <button id="b">2. Set metadata (setBaseURI)</button>
 <button id="o">3. Buka mint (setMintOpen)</button>
+<button id="w">4. Tarik dana mint (withdraw)</button>
 <div id="log">Status: belum terhubung</div>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
 <script>
 const CA="0x2b110eDf44534E063fCE1805b092FfacC0DF13F5",BASE="https://raw.githubusercontent.com/Runea-system/Seocheck/main/metadata/";
-const ABI=["function setBaseURI(string)","function setMintOpen(bool)","function owner() view returns (address)","function mintOpen() view returns (bool)"];
+const ABI=["function setBaseURI(string)","function setMintOpen(bool)","function owner() view returns (address)","function mintOpen() view returns (bool)","function withdraw()"];
 let c;const L=t=>document.getElementById('log').textContent=t;
 async function conn(){if(!window.ethereum)return L("Wallet tidak ditemukan. Buka di browser MetaMask/Trust Wallet.");
 try{await ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x38"}]})}catch(e){}
@@ -19,4 +20,5 @@ async function run(f,label){try{if(!c)await conn();L(label+"… konfirmasi di wa
 document.getElementById('c').onclick=conn;
 document.getElementById('b').onclick=()=>run(()=>c.setBaseURI(BASE),"setBaseURI");
 document.getElementById('o').onclick=()=>run(()=>c.setMintOpen(true),"setMintOpen");
+document.getElementById('w').onclick=()=>run(()=>c.withdraw(),"withdraw");
 </script><script>if("serviceWorker" in navigator){addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})})}</script></body></html>
