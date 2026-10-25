@@ -480,10 +480,11 @@
           <a href="#mint"><span class="zh">铸造</span><span class="en x-inl">Mint</span></a>
           <a href="#tiers"><span class="zh">等级</span><span class="en x-inl">Tiers</span></a>
           <a href="#gallery"><span class="zh">画廊</span><span class="en x-inl">Gallery</span></a>
-          <a href="#unique"><span class="zh">独一无二</span><span class="en x-inl">Unique</span></a>
+          <a href="#unique"><span class="zh">造型</span><span class="en x-inl">Art</span></a>
           <a href="#lore"><span class="zh">传说</span><span class="en x-inl">Lore</span></a>
           <a href="#agent">Agent <span class="zh">技能</span><span class="en x-inl">Skill</span></a>
           <a href="#faq">FAQ</a>
+          <a href="https://x.com/moondengagentic" target="_blank" rel="noopener" aria-label="Moondeng on X">𝕏 <span class="en x-inl">@moondengagentic</span></a>
         </nav>
         <div class="x-lang" role="group" aria-label="Language">
           <button type="button" data-lang="both" aria-pressed="true">中/EN</button>
@@ -596,11 +597,11 @@ mintTier(uint8 tier, uint256 qty) payable <span class="x-cmt">// tier 1–4: 0.0
           </div>
 
           <div class="x-card x-free x-acc-free">
-            <figure class="x-freeimg"><img src="moondeng-splash.png" alt="Free mint: a baby hippo, look chosen at random" /><span class="x-ribbon" aria-hidden="true">FREE</span></figure>
+            <figure class="x-freeimg"><img src="moondeng-splash.png" alt="Free mint: a baby hippo" /><span class="x-ribbon" aria-hidden="true">FREE</span></figure>
             <div style="display:grid;gap:8px">
               <h3 class="x-bi"><span class="zh">免费铸造</span><span class="en">Free Mint</span></h3>
               <p class="x-price">0.0002 BNB<small><span class="zh">仅手续费 + Gas</span><span class="en x-inl">fee + gas only</span></small></p>
-              <p class="x-random x-bi"><span class="zh">免费铸造的河马造型随机。</span><span class="en">Free mints get a random look.</span></p>
+              <p class="x-random x-bi"><span class="zh">造型由铸造到的编号决定，铸造前无法挑选。</span><span class="en">Your look is set by the token number you get; it can’t be picked in advance.</span></p>
             </div>
             <div class="x-buy">
               <div class="x-stepper" data-stepper>
@@ -662,9 +663,9 @@ mintTier(uint8 tier, uint256 qty) payable <span class="x-cmt">// tier 1–4: 0.0
 
         <section class="section" id="unique">
           <div class="head">
-            <p class="head__eyebrow">Unique</p>
-            <h2 class="x-bi"><span class="zh">2,222 只，每只都不一样</span><span class="en">2,222 hippos, every one unique</span></h2>
-            <p class="head__sub x-bi"><span class="zh">每只都由背景、皮肤、头饰、配饰等特征组合而成，铸造时随机生成</span><span class="en">Each one combines background, skin, headwear and extras, randomised at mint</span></p>
+            <p class="head__eyebrow">Art</p>
+            <h2 class="x-bi"><span class="zh">50 款手绘造型，2,222 只小河马</span><span class="en">50 hand-drawn looks, 2,222 hippos</span></h2>
+            <p class="head__sub x-bi"><span class="zh">共 50 款造型（背景、皮肤、头饰、配饰组合），按编号循环分配，每款约 44–45 只</span><span class="en">50 looks (background, skin, headwear, extras), assigned by token number in rotation, about 44–45 of each</span></p>
           </div>
           <div class="x-card x-feat" id="feat" aria-live="polite">
             <span class="x-art" id="feat-art"></span>
@@ -825,8 +826,8 @@ mintTier(uint8 tier, uint256 qty) payable <span class="x-cmt">// tier 1–4: 0.0
               <p class="x-bi"><span class="zh">2,222 只。</span><span class="en">2,222.</span></p>
             </details>
             <details>
-              <summary><span class="x-bi"><span class="zh">每只都不一样吗？</span><span class="en">Is every one unique?</span></span><svg class="x-ico x-chev"><use href="#i-chevron"/></svg></summary>
-              <p class="x-bi"><span class="zh">是的，2,222 只各不相同，每只都由背景、皮肤、头饰、配饰等特征组合而成，铸造时随机生成。</span><span class="en">Yes, all 2,222 are distinct: each combines background, skin, headwear and extras, randomised at mint.</span></p>
+              <summary><span class="x-bi"><span class="zh">每只都不一样吗？</span><span class="en">Is every one different?</span></span><svg class="x-ico x-chev"><use href="#i-chevron"/></svg></summary>
+              <p class="x-bi"><span class="zh">不是。Moondeng 共有 50 款手绘造型，按编号循环分配给 2,222 只（例如 #1 与 #51 造型相同），每只的编号唯一。</span><span class="en">No. Moondeng has 50 hand-drawn looks assigned to the 2,222 tokens in rotation (e.g. #1 and #51 share a look); each token number is its own.</span></p>
             </details>
             <details>
               <summary><svg class="x-ico"><use href="#i-shield"/></svg><span class="x-bi"><span class="zh">如何防骗？</span><span class="en">How do I stay safe?</span></span><svg class="x-ico x-chev"><use href="#i-chevron"/></svg></summary>
@@ -836,7 +837,7 @@ mintTier(uint8 tier, uint256 qty) payable <span class="x-cmt">// tier 1–4: 0.0
         </section>
       </main>
       <footer class="foot">
-        <p>Moondeng · 月光小河马 · BNB Smart Chain (56) · 合约 Contract: <a href="https://bscscan.com/address/0x2b110eDf44534E063fCE1805b092FfacC0DF13F5" target="_blank" rel="noopener" class="x-footaddr">0x2b110eDf44534E063fCE1805b092FfacC0DF13F5</a> · © 2026</p>
+        <p>Moondeng · 月光小河马 · BNB Smart Chain (56) · 合约 Contract: <a href="https://bscscan.com/address/0x2b110eDf44534E063fCE1805b092FfacC0DF13F5" target="_blank" rel="noopener" class="x-footaddr">0x2b110eDf44534E063fCE1805b092FfacC0DF13F5</a> · 𝕏 <a href="https://x.com/moondengagentic" target="_blank" rel="noopener">@moondengagentic</a> · © 2026</p>
         <a class="badge" href="https://hark.com/" target="_blank" rel="noopener"><span class="hark-mark"></span><span>built by hark</span></a>
       </footer>
     </div>
