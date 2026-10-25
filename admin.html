@@ -1,4 +1,4 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Moondeng Owner Panel</title>
+<!doctype html><html lang="id"><head><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#1b1838"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Moondeng"><meta name="application-name" content="Moondeng"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Moondeng Owner Panel</title>
 <style>body{font-family:system-ui;background:#111;color:#eee;max-width:480px;margin:auto;padding:20px}button{width:100%;padding:16px;margin:8px 0;font-size:17px;border:0;border-radius:12px;background:#f3ba2f;color:#000;font-weight:700}#log{white-space:pre-wrap;font-size:13px;background:#222;padding:12px;border-radius:8px;word-break:break-all}</style></head><body>
 <h2>Moondeng Owner Panel</h2>
 <p>Buka halaman ini di browser MetaMask / Trust Wallet dengan wallet owner<br><small>0x962Fa344BBbf9276d01700EB7d7588031473F44d</small></p>
@@ -19,4 +19,4 @@ async function run(f,label){try{if(!c)await conn();L(label+"… konfirmasi di wa
 document.getElementById('c').onclick=conn;
 document.getElementById('b').onclick=()=>run(()=>c.setBaseURI(BASE),"setBaseURI");
 document.getElementById('o').onclick=()=>run(()=>c.setMintOpen(true),"setMintOpen");
-</script></body></html>
+</script><script>if("serviceWorker" in navigator){addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})})}</script></body></html>

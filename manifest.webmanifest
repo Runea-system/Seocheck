@@ -1,0 +1,22 @@
+{
+  "name": "Moondeng · 月光小河马",
+  "short_name": "Moondeng",
+  "description": "Moondeng — 2,222 baby hippos on BNB Chain. Mint with your wallet or Binance Agentic Wallet.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1b1838",
+  "theme_color": "#1b1838",
+  "lang": "zh-CN",
+  "categories": ["finance", "entertainment"],
+  "icons": [
+    {"src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "Mint 铸造", "url": "/mint.html", "icons": [{"src": "/icon-192.png", "sizes": "192x192"}]}
+  ]
+}

@@ -1,4 +1,4 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mint Moondeng</title>
+<!doctype html><html lang="id"><head><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#1b1838"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Moondeng"><meta name="application-name" content="Moondeng"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mint Moondeng</title>
 <style>body{font-family:system-ui;background:#0f0b1a;color:#eee;max-width:480px;margin:auto;padding:20px}h1{margin:.2em 0}button{width:100%;padding:15px;margin:6px 0;font-size:16px;border:0;border-radius:12px;background:#f3ba2f;color:#000;font-weight:700}select,input{width:100%;padding:12px;font-size:16px;border-radius:10px;border:0;margin:6px 0;box-sizing:border-box}#log{white-space:pre-wrap;font-size:13px;background:#1d1630;padding:12px;border-radius:8px;word-break:break-all;margin-top:10px}small{color:#aaa}</style></head><body>
 <h1>🦛 Mint Moondeng</h1><small>BNB Smart Chain · 0x2b110eDf44534E063fCE1805b092FfacC0DF13F5</small>
 <p id="sup">Minted: … / 2,222</p>
@@ -21,4 +21,4 @@ const p=new ethers.BrowserProvider(window.ethereum);await p.send("eth_requestAcc
 document.getElementById('c').onclick=conn;
 document.getElementById('m').onclick=async()=>{try{if(!c)await conn();if(!c)return;const t=+document.getElementById('t').value,q=Math.max(1,Math.min(5,+document.getElementById('q').value||1));
 const v=ethers.parseEther(P[t])*BigInt(q);L("Konfirmasi di wallet…");const tx=t==0?await c.freeMint(q,{value:v}):await c.mintTier(t,q,{value:v});L("Dikirim: "+tx.hash);await tx.wait();L("✅ Mint berhasil! "+q+" Moondeng\n"+tx.hash);ro.totalMinted().then(n=>document.getElementById('sup').textContent="Minted: "+n+" / 2,222")}catch(e){L("Gagal: "+(e.shortMessage||e.reason||e.message))}};
-</script></body></html>
+</script><script>if("serviceWorker" in navigator){addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})})}</script></body></html>
