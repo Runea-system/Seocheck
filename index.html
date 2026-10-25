@@ -540,7 +540,7 @@
               <span class="x-ibadge"><svg class="x-ico"><use href="#i-bot"/></svg></span>
               <h3 class="x-bi"><span class="zh">用 Agent 铸造</span><span class="en">Mint with agent</span></h3>
               <p class="x-bi"><span class="zh">交给 Binance Agentic Wallet，三步完成。</span><span class="en">Let a Binance Agentic Wallet do it, in three steps.</span></p>
-              <div class="x-row"><a class="x-btn" href="#agent"><svg class="x-ico"><use href="#i-arrow"/></svg><span><span class="zh">查看步骤</span><span class="en x-inl">See the steps</span></span></a></div>
+              <div class="x-row"><button class="x-btn x-btn--primary" type="button" data-copy="quickprompt"><svg class="x-ico"><use href="#i-copy"/></svg><span class="x-bi"><span class="zh">复制 Agent 指令</span><span class="en">Copy agent prompt</span></span></button><a class="x-btn" href="#agent"><svg class="x-ico"><use href="#i-arrow"/></svg><span><span class="zh">查看步骤</span><span class="en x-inl">See the steps</span></span></a></div>
             </div>
           </div>
           <div class="x-tools">
@@ -753,13 +753,14 @@ mintTier(uint8 tier, uint256 qty) payable <span class="x-cmt">// tier 1–4: 0.0
           <div class="x-card x-skill">
             <div class="x-check__top">
               <span class="x-ibadge"><svg class="x-ico"><use href="#i-bot"/></svg></span>
-              <h3 class="x-bi"><span class="zh">安装铸造技能</span><span class="en">Install the mint skill</span></h3>
+              <h3 class="x-bi"><span class="zh">一键复制 Agent 指令</span><span class="en">Copy the agent prompt</span></h3>
             </div>
+            <p class="x-bi"><span class="zh">复制后直接发给你的 Binance Agentic Wallet 智能体，即可免费铸造。</span><span class="en">Paste it to your Binance Agentic Wallet agent to free mint.</span></p>
             <div class="x-code">
-              <code id="skill">安装 Moondeng 铸造技能 / Install the Moondeng mint skill</code>
-              <button class="x-btn" type="button" data-copy="skill"><svg class="x-ico"><use href="#i-copy"/></svg><span><span class="zh">复制</span><span class="en x-inl">Copy</span></span></button>
+              <code id="quickprompt">请用我的 Binance Agentic Wallet 在 BNB Chain 上铸造 Moondeng NFT。网络：BNB Smart Chain（Chain ID 56）。合约地址：0x2b110eDf44534E063fCE1805b092FfacC0DF13F5。免费铸造调用 freeMint(qty)，每只 0.0002 BNB（value = 0.0002 × qty BNB）。每个钱包最多 5 只。发送前先用 eth_call 模拟，不要批准任何代币授权，也不要签署任何消息。完成后告诉我交易哈希。</code>
+              <button class="x-btn x-btn--primary" type="button" data-copy="quickprompt"><svg class="x-ico"><use href="#i-copy"/></svg><span><span class="zh">复制指令</span><span class="en x-inl">Copy</span></span></button>
             </div>
-            <p class="x-note x-bi"><svg class="x-ico"><use href="#i-clock"/></svg><span><span class="zh">技能文件将随合约一起发布</span><span class="en x-inl">Skill file releases with the contract</span></span></p>
+            <p class="x-note x-bi"><svg class="x-ico"><use href="#i-sparkle"/></svg><span><span class="zh">铸造成功后晒出 agent 截图并 @moondengagentic</span><span class="en x-inl">Minted? Post your agent screenshot and tag @moondengagentic</span></span></p>
           </div>
           <div class="steps">
             <article class="step">
