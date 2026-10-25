@@ -1,0 +1,22 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Moondeng Owner Panel</title>
+<style>body{font-family:system-ui;background:#111;color:#eee;max-width:480px;margin:auto;padding:20px}button{width:100%;padding:16px;margin:8px 0;font-size:17px;border:0;border-radius:12px;background:#f3ba2f;color:#000;font-weight:700}#log{white-space:pre-wrap;font-size:13px;background:#222;padding:12px;border-radius:8px;word-break:break-all}</style></head><body>
+<h2>Moondeng Owner Panel</h2>
+<p>Buka halaman ini di browser MetaMask / Trust Wallet dengan wallet owner<br><small>0x962Fa344BBbf9276d01700EB7d7588031473F44d</small></p>
+<button id="c">1. Hubungkan wallet</button>
+<button id="b">2. Set metadata (setBaseURI)</button>
+<button id="o">3. Buka mint (setMintOpen)</button>
+<div id="log">Status: belum terhubung</div>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+<script>
+const CA="0x2b110eDf44534E063fCE1805b092FfacC0DF13F5",BASE="https://raw.githubusercontent.com/Runea-system/Seocheck/main/metadata/";
+const ABI=["function setBaseURI(string)","function setMintOpen(bool)","function owner() view returns (address)","function mintOpen() view returns (bool)"];
+let c;const L=t=>document.getElementById('log').textContent=t;
+async function conn(){if(!window.ethereum)return L("Wallet tidak ditemukan. Buka di browser MetaMask/Trust Wallet.");
+try{await ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x38"}]})}catch(e){}
+const p=new ethers.BrowserProvider(window.ethereum);await p.send("eth_requestAccounts",[]);const s=await p.getSigner();c=new ethers.Contract(CA,ABI,s);
+const me=await s.getAddress(),ow=await c.owner();L("Terhubung: "+me+(me.toLowerCase()==ow.toLowerCase()?"\n✅ Ini wallet owner":"\n❌ Bukan wallet owner ("+ow+")")+"\nMint terbuka: "+await c.mintOpen());return c}
+async function run(f,label){try{if(!c)await conn();L(label+"… konfirmasi di wallet");const tx=await f();L(label+" dikirim: "+tx.hash);await tx.wait();L("✅ "+label+" berhasil\n"+tx.hash)}catch(e){L("Gagal: "+(e.shortMessage||e.message))}}
+document.getElementById('c').onclick=conn;
+document.getElementById('b').onclick=()=>run(()=>c.setBaseURI(BASE),"setBaseURI");
+document.getElementById('o').onclick=()=>run(()=>c.setMintOpen(true),"setMintOpen");
+</script></body></html>
